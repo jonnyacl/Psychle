@@ -5,9 +5,9 @@ import './Psychle.css';
 class Psychle extends Component {
   render() {
     return (
-      <div className="App">
-        Blahdeblah
-      </div>
+      <h1 className="App">
+        Welcome to Psychle. Create the bike that psyches you.
+      </h1>
     );
   }
 }
