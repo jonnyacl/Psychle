@@ -1,8 +1,14 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { render } from 'react-dom';
 import './index.css';
-import Psychle from './Components/Psychle/Psychle';
+import Psychle from './components/Psychle';
 import registerServiceWorker from './registerServiceWorker';
 
-ReactDOM.render(<Psychle />, document.getElementById('root'));
+import configureStore from './configureStore';
+
+const store = configureStore();
+
+render(
+    <Psychle store={store} />, document.getElementById('root')
+);
 registerServiceWorker();
