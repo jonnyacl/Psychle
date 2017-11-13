@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { login } from '../actions/authenticate'
+import TextItem from './common/TextItem'
 
 class LoginForm extends Component {
   constructor (props) {
@@ -22,10 +23,18 @@ class LoginForm extends Component {
   }
 
   isValid () {
-    
+    // const {errors, isValid} = validateInput(this.state);
   }
 
   onSubmit (e) {
+    e.preventDefault();
+    this.setState({errors: {}, isLoading: true});
+    this.props.login(this.state)
+      .then(
+        (res) => {
+          // add success/welcome message
+        }, (err) => this.setState({errors: err, isLoading: false})
+      )
     
   }
 
@@ -36,7 +45,7 @@ class LoginForm extends Component {
 
         {errors.form && <div className='alert error'>{errors.form}</div>}
 
-        {/* <TextFieldGroup
+        <TextItem
           error={errors.username}
           label='Username'
           onChange={this.onChange}
@@ -44,14 +53,14 @@ class LoginForm extends Component {
           field='username'
         />
 
-        <TextFieldGroup
+        <TextItem
           error={errors.password}
           label='Password'
           onChange={this.onChange}
           value={this.state.password}
           field='password'
           type='password'
-        /> */}
+        />
 
         <div>
           <button className='button large lightblue login' disabled={isLoading}>Login</button>
@@ -59,7 +68,6 @@ class LoginForm extends Component {
       </form>
     )
   }
-
 }
 
 const { func, object } = PropTypes

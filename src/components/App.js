@@ -9,7 +9,7 @@ class App extends Component {
         return (
             <div>
                 <Header />
-                <Navigate location={this.props.location} />
+                {(this.props.isAuthenticated ? <Navigate location={this.props.location} /> : '')}
             </div>
         );
     }

@@ -1,5 +1,6 @@
 import axios from 'axios';
 import jwtDecode from 'jwt-decode'
+import { config } from '../config';
 
 export const SET_CURRENT_USER = 'SET_CURRENT_USER';
 
@@ -13,7 +14,12 @@ export const register = userdata => dispatch => axios.post('/api/users', userdat
     console.log(res)
 });
 
-export const login = data => dispatch => axios.post('/auth/signin', data)
+function apify(path) {
+    const newPath = config.api_root + ':' + config.api_port + '/' + path;
+    return newPath;
+}
+
+export const login = data => dispatch => axios.post(apify('login'), data, {'Accept': 'application/json'})
     .then(res => {
         const token = res.data.token
         localStorage.setItem('mm-jwtToken', token)
