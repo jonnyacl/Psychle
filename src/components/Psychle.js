@@ -6,7 +6,7 @@ import { BrowserRouter } from 'react-router-dom';
 
 import App from './App';
 import LoginForm from './LoginForm';
-import { Register } from './Register';
+import Register from './Register';
 
 const Psychle = ({ store }) => {
   return (

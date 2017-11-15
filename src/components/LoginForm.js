@@ -33,6 +33,7 @@ class LoginForm extends Component {
       .then(
         (res) => {
           // add success/welcome message
+          this.context.router.history.push('/');
         }, (err) => this.setState({errors: err, isLoading: false})
       )
     
