@@ -1,6 +1,7 @@
 import axios from 'axios';
 import jwtDecode from 'jwt-decode'
 import { config } from '../config';
+import { apify, apiPost, apiGet } from './apiRequest';
 
 export const SET_CURRENT_USER = 'SET_CURRENT_USER';
 
@@ -23,10 +24,7 @@ export const register = userdata => dispatch => axios.post(apify('register'), us
     console.log(res)
 });
 
-function apify(path) {
-    const newPath = config.api_root + ':' + config.api_port + '/' + path;
-    return newPath;
-}
+
 
 export const login = data => dispatch => axios.post(apify('login'), data, {'Accept': 'application/json'})
     .then(res => {
@@ -44,10 +42,15 @@ export const login = data => dispatch => axios.post(apify('login'), data, {'Acce
 
 export const logout = () => dispatch => {
     const jwt = localStorage.getItem('mm-jwtToken')
+    const authHeader = {
+        headers: {'Authorization' : `Bearer ${jwt}`}
+    }
     localStorage.removeItem('mm-jwtToken')
     setAuthToken(false)
     dispatch(setCurrentUser({}))
-    dispatch(axios.post(apify('logout'), jwt, {'Accept': 'application/json'}))
+    axios.post(apify('logout'), {}, authHeader)
+        .then(res => console.log(res))
+        .catch(err => console.log(err))
 };
 
 function handleErr (err) {
