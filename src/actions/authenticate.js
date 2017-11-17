@@ -43,9 +43,11 @@ export const login = data => dispatch => axios.post(apify('login'), data, {'Acce
 });
 
 export const logout = () => dispatch => {
+    const jwt = localStorage.getItem('mm-jwtToken')
     localStorage.removeItem('mm-jwtToken')
     setAuthToken(false)
     dispatch(setCurrentUser({}))
+    dispatch(axios.post(apify('logout'), jwt, {'Accept': 'application/json'}))
 };
 
 function handleErr (err) {
