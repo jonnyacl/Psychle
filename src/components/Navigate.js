@@ -10,7 +10,6 @@ export default class Navigate extends Component {
                     <li className={this.props.location.pathname === '/' ? 'active' : ''}><Link to='/'>Dashboard</Link></li>
                     <li className={this.props.location.pathname === '/profile' ? 'active' : ''}><Link to='/profile'>Profile</Link></li>
                     <li className={this.props.location.pathname === '/bikebuilder' ? 'active' : ''}><Link to='/bikebuilder'>Bike Builder</Link></li>
-                    <li><Link to='/logout'>Logout</Link></li>
                 </ul>
             </nav>
         )
