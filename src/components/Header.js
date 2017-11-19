@@ -28,10 +28,11 @@ class Header extends Component {
         )
 
         const loggedIn = (
-            <ul className = 'navigation'>
-                <li>Welcome, {user.firstName}</li>
-                <li><a href='#' onClick={this.logout}>Logout</a></li>
-            </ul>
+            <div className='welcome'>Welome, {user.firstName} 
+                <ul className = 'navigation'>
+                    <li><a href='#' onClick={this.logout}>Logout</a></li>
+                </ul>
+            </div>
         )
 
         return(

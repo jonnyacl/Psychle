@@ -7,6 +7,8 @@ import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 import LoginForm from './LoginForm';
 import Register from './Register';
+import BikeBuilder from './BikeBuilder';
+import Profile from './Profile';
 
 const Psychle = ({ store }) => {
   return (
@@ -15,7 +17,9 @@ const Psychle = ({ store }) => {
         <div>
           <Route path='/' component= {App} />
           <Route path='/login' component={LoginForm} />
-          <Route path='/register' component={Register}/>
+          <Route path='/register' component={Register} />
+          <Route path='/bikebuilder' component={BikeBuilder} />
+          <Route path='/profile' component={Profile} />
         </div>
       </BrowserRouter>
     </Provider>
