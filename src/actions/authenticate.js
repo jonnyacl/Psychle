@@ -13,31 +13,33 @@ export const setCurrentUser = (user) => ({
 export const register = userdata => dispatch => axios.post(apify('register'), userdata)
   .then(res => {
     const jwt = res.data.jwt;
-    localStorage.setItem('mm-jwtToken', jwt);
-    const u = {
-        firstName: res.data.firstName,
-        lastName: res.data.lastName,
-        email: res.data.email
-    }
-    dispatch(setCurrentUser(u))
-    setAuthToken(jwt);
-    console.log(res)
-});
-
-
-
-export const login = data => dispatch => axios.post(apify('login'), data, {'Accept': 'application/json'})
-    .then(res => {
-        const jwt = res.data.jwt
-        localStorage.setItem('mm-jwtToken', jwt)
-        setAuthToken(jwt)
+    if (jwt) {
+        localStorage.setItem('mm-jwtToken', jwt);
         const u = {
             firstName: res.data.firstName,
             lastName: res.data.lastName,
             email: res.data.email
         }
         dispatch(setCurrentUser(u))
-        console.log(res);
+        setAuthToken(jwt);
+        console.log(res)
+    }
+});
+
+export const login = data => dispatch => axios.post(apify('login'), data, {'Accept': 'application/json'})
+    .then(res => {
+        const jwt = res.data.jwt
+        if (jwt) {
+            localStorage.setItem('mm-jwtToken', jwt)
+            setAuthToken(jwt)
+            const u = {
+                firstName: res.data.firstName,
+                lastName: res.data.lastName,
+                email: res.data.email
+            }
+            dispatch(setCurrentUser(u))
+            console.log(res);
+        }
 });
 
 export const logout = () => dispatch => {
