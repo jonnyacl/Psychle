@@ -24,6 +24,8 @@ export const register = userdata => dispatch => axios.post(apify('register'), us
         setAuthToken(jwt);
         console.log(res)
     }
+  }).catch(err => {
+    console.log(err.response.data);
 });
 
 export const login = data => dispatch => axios.post(apify('login'), data, {'Accept': 'application/json'})
