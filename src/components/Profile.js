@@ -6,11 +6,11 @@ class Profile extends Component {
 
     render() {
 
-        const { isAuthenticated } = this.props.auth;
+        const { isAuthenticated, user } = this.props.auth;
 
         return (
             
-            <div>{isAuthenticated ? 'Profile page': 'Please login to view your profile'}</div>
+            <div>{isAuthenticated ? user.firstname + ' ' + user.lastname: 'Please login to view your profile'}</div>
         )
     }
  

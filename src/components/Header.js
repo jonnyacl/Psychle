@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { logout } from '../actions/authenticate';
+import header from '../styles/header.css'
 
 class Header extends Component {
 
@@ -21,23 +22,30 @@ class Header extends Component {
         const { isAuthenticated, user } = this.props.auth;
 
         const nonLoggedIn = (
-            <ul className = 'navigation'>
-                <li><Link to='/login'>Log In</Link></li>
-                <li><Link to='/register'>Sign Up</Link></li>
-            </ul>
+            <div>
+                <Link to='/' className='logo'>Psychle</Link>
+                <div className = 'navigation'>
+                    <div className='login'><Link to='/login' >Log In</Link></div>
+                    <div className='register'><Link to='/register' >Sign Up</Link></div>
+                </div>
+            </div>
         )
 
         const loggedIn = (
-            <div className='welcome'>Welome, {user.firstname} 
-                <ul className = 'navigation'>
-                    <li><a href='#' onClick={this.logout}>Logout</a></li>
-                </ul>
+            <div className='navigation'>
+                <Link to='/' className='logo'>Psychle</Link>
+                <div>
+                    <Link to='/profile'>{user.firstname}</Link>
+                </div>
+                <div>
+                    <a href='#' onClick={this.logout}>Logout</a>
+                </div>
             </div>
         )
 
         return(
             <header className='container'>
-                <a href='/' className='logo'>Psychle</a>
+                
                 {isAuthenticated ? loggedIn : nonLoggedIn}
             </header>
         )

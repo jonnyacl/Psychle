@@ -1,0 +1,30 @@
+.navigation {
+    color: red;
+    float: right;
+    display: inline;
+    width: 50%;
+}
+
+.login {
+    float: right;
+    margin-right: 5px;
+}
+
+.register {
+    float: right;
+    margin-right: 5px;
+}
+
+.welcome {
+    color: blue;
+    margin: 10px;
+}
+
+.container {
+    margin: 10px;
+}
+
+.logo {
+    float: left;
+    display: inline;
+}
