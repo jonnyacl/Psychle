@@ -1,5 +1,5 @@
 import axios from 'axios';
-import jwtDecode from 'jwt-decode'
+import jwt_decode from 'jwt-decode'
 import { config } from '../config';
 import { apify, apiPost, apiGet } from './apiRequest';
 
@@ -10,16 +10,24 @@ export const setCurrentUser = (user) => ({
     user
   });
 
+function getUser(jwt) {
+    const u = {
+        firstname: jwt.firstname,
+        lastname: jwt.lastname,
+        username: jwt.username,
+        email: jwt.email,
+        id: jwt.id
+    }
+    return u
+}
+
 export const register = userdata => dispatch => axios.post(apify('register'), userdata)
   .then(res => {
     const jwt = res.data.jwt;
     if (jwt) {
+        const decodedJwt = jwt_decode(jwt)
         localStorage.setItem('mm-jwtToken', jwt);
-        const u = {
-            firstName: res.data.firstName,
-            lastName: res.data.lastName,
-            email: res.data.email
-        }
+        const u = getUser(decodedJwt)
         dispatch(setCurrentUser(u))
         setAuthToken(jwt);
         console.log(res)
@@ -32,13 +40,10 @@ export const login = data => dispatch => axios.post(apify('login'), data, {'Acce
     .then(res => {
         const jwt = res.data.jwt
         if (jwt) {
+            const decodedJwt = jwt_decode(jwt)
             localStorage.setItem('mm-jwtToken', jwt)
             setAuthToken(jwt)
-            const u = {
-                firstName: res.data.firstName,
-                lastName: res.data.lastName,
-                email: res.data.email
-            }
+            const u = getUser(decodedJwt)
             dispatch(setCurrentUser(u))
             console.log(res);
         }

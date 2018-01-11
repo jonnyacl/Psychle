@@ -28,7 +28,7 @@ class Header extends Component {
         )
 
         const loggedIn = (
-            <div className='welcome'>Welome, {user.firstName} 
+            <div className='welcome'>Welome, {user.firstname} 
                 <ul className = 'navigation'>
                     <li><a href='#' onClick={this.logout}>Logout</a></li>
                 </ul>
@@ -37,7 +37,7 @@ class Header extends Component {
 
         return(
             <header className='container'>
-                <div className='logo'>Psychle</div>
+                <a href='/' className='logo'>Psychle</a>
                 {isAuthenticated ? loggedIn : nonLoggedIn}
             </header>
         )
