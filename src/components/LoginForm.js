@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { login } from '../actions/authenticate'
 import TextItem from './common/TextItem'
+import loginform from '../styles/login.css'
 
 class LoginForm extends Component {
   constructor (props) {
@@ -42,31 +43,33 @@ class LoginForm extends Component {
   render () {
     const { errors, isLoading } = this.state
     return (
-      <form className="loginform" onSubmit={this.onSubmit}>
+      <div className="loginform">
+        <form onSubmit={this.onSubmit}>
 
-        {errors.form && <div className='alert error'>{errors.form}</div>}
+          {errors.form && <div className='alert error'>{errors.form}</div>}
 
-        <TextItem
-          error={errors.username}
-          label='Username'
-          onChange={this.onChange}
-          value={this.state.username}
-          field='username'
-        />
+          <TextItem
+            error={errors.username}
+            label='Username'
+            onChange={this.onChange}
+            value={this.state.username}
+            field='username'
+          />
 
-        <TextItem
-          error={errors.password}
-          label='Password'
-          onChange={this.onChange}
-          value={this.state.password}
-          field='password'
-          type='password'
-        />
+          <TextItem
+            error={errors.password}
+            label='Password'
+            onChange={this.onChange}
+            value={this.state.password}
+            field='password'
+            type='password'
+          />
 
-        <div>
-          <button className='button large lightblue login' disabled={isLoading}>Login</button>
-        </div>
-      </form>
+          <div>
+            <button className='button large lightblue login' disabled={isLoading}>Login</button>
+          </div>
+        </form>
+      </div>
     )
   }
 }

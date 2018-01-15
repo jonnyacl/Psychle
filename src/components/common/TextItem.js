@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
+import formstyles from '../../styles/forms.css'
 
 const TextItem = ({ label, field, value, error, type, onChange }) => {
     return(
